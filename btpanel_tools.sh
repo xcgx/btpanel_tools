@@ -456,21 +456,24 @@ update_wafrule(){
 }
 #开启完全离线服务
 open_offline(){
-    rm -f ${panel_path}/data/home_host.pl
-    echo 'True' >${panel_path}/data/not_network.pl
-    \cp -rf ${panel_path}/config/hosts.json  ${panel_path}/config/hosts.json.bk
-    echo '[ "127.0.0.1" ]' >${panel_path}/config/hosts.json
-    chattr -i /etc/hosts
-    sed -i "/bt.cn/d" /etc/hosts
-    echo '192.168.88.188 bt.cn www.bt.cn api.bt.cn download.bt.cn dg2.bt.cn dg1.bt.cn' >>/etc/hosts
-    if [[ "${crackurl}" != "0" ]]; then
-        sed -i "/${crackurl}/d" /etc/hosts
-        echo "192.168.88.188 www.${crackurl} api.${crackurl} download.${crackurl}" >>/etc/hosts
+	read -p "请在执行前更新下软件商店，确保软件列表缓存文件存在。（y：确认/n：取消）:" function
+	if [ "${function}" == "y" ]; then
+		rm -f ${panel_path}/data/home_host.pl
+		echo 'True' >${panel_path}/data/not_network.pl
+		\cp -rf ${panel_path}/config/hosts.json  ${panel_path}/config/hosts.json.bk
+		echo '[ "127.0.0.1" ]' >${panel_path}/config/hosts.json
+		chattr -i /etc/hosts
+		sed -i "/bt.cn/d" /etc/hosts
+		echo '192.168.88.188 bt.cn www.bt.cn api.bt.cn download.bt.cn dg2.bt.cn dg1.bt.cn' >>/etc/hosts
+		if [[ "${crackurl}" != "0" ]]; then
+		    sed -i "/${crackurl}/d" /etc/hosts
+		    echo "192.168.88.188 www.${crackurl} api.${crackurl} download.${crackurl}" >>/etc/hosts
+		fi
+		if [[ "${crackurl}" != "hostcli.com" ]]; then
+		    echo "192.168.88.188 v7.hostcli.com" >>/etc/hosts
+		fi
 	fi
-    if [[ "${crackurl}" != "hostcli.com" ]]; then
-        echo "192.168.88.188 v7.hostcli.com" >>/etc/hosts
-	fi
-    back_home
+	back_home
 }
 #关闭完全离线服务
 close_offline(){
