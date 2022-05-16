@@ -8,6 +8,8 @@ if [ ! -f "/etc/init.d/bt" ] || [ ! -d "/www/server/panel" ]; then
 	echo -e "此服务器没有安装宝塔！"
 	exit;
 fi
+p_version=$(cat ${panel_path}/class/common.py|grep "version = "|awk '{print $3}'|tr -cd [0-9.])
+btpanel_version=${p_version:0:5}
 #获取包管理器
 if [ -f "/usr/bin/yum" ] && [ -f "/etc/yum.conf" ]; then
 	PM="yum"
@@ -32,27 +34,7 @@ new_version(){
     echo -e "还没有发布新版本"
     back_home
 }
-#获取宝塔版本
-auth_version(){
-    auth_version='官方正版'
-    crackurl="0"
-	CRACK_URL=(oss.yuewux.com download.btpanel.net 182.61.16.58 hostcli.com fenhao.me seele.wang moetas.com 05bt.com);
-	for url in ${CRACK_URL[@]};
-	do 	
-	    FIIE_PATH=(/etc/init.d/bt ${panel_path}/tools.py ${panel_path}/class/panelPlugin.py ${panel_path}/pyenv/lib/python3.7/site-packages/requests/api.py ${panel_path}/pyenv/lib/python3.7/urllib/request.py);
-    	for path in ${FIIE_PATH[@]};
-    	do
-    		CRACK_INIT=$(cat ${path} |grep ${url})
-    		if [ "${CRACK_INIT}" ];then
-    			auth_version='破解版本'
-    			crackurl=${url}
-    		fi
-    	done
-	done
-	p_version=$(cat ${panel_path}/class/common.py|grep "version = "|awk '{print $3}'|tr -cd [0-9.])
-	btpanel_version=${p_version:0:5}
-}
-auth_version
+
 #清理垃圾
 cleaning_garbage(){
     echo -e "正在清理官方版残留文件......"
