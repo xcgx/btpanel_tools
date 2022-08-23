@@ -1,6 +1,6 @@
 #!/bin/bash
 #全局变量
-download_url=https://raw.githubusercontent.com/gacjie/btpanel_tools/main
+download_url=https://ghproxy.com/https://raw.githubusercontent.com/gacjie/btpanel_tools/main
 panel_path=/www/server/panel
 tools_version='220516'
 #检查是否安装面板
@@ -398,7 +398,7 @@ degrade_btpanel(){
     	echo "5.9平滑升级到6.0的命令：curl http://download.bt.cn/install/update_to_6.sh|bash"
     	exit 0;
     fi
-    wget -T 5 -O panel.zip https://raw.githubusercontent.com/gacjie/btpanel_tools/main/update/LinuxPanel-${version}.zip
+    wget -T 5 -O panel.zip https://ghproxy.com/https://raw.githubusercontent.com/gacjie/btpanel_tools/main/update/LinuxPanel-${version}.zip
     unzip -o panel.zip -d /www/server/ > /dev/null
     rm -f panel.zip
     rm -f ${panel_path}/*.pyc
