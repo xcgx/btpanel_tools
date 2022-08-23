@@ -13,7 +13,7 @@ TG交流群：t.me/btfans
 ###### github项目地址命令   
  **[(点此免费领取0.99元专业版体验券，3188元大礼包)](https://www.bt.cn/?invite_code=MV9yaHFycXY=)**   
 ```shell-session
-wget -O btpanel_tools.sh https://raw.githubusercontent.com/gacjie/btpanel_tools/main/btpanel_tools.sh && bash btpanel_tools.sh
+wget -O btpanel_tools.sh https://ghproxy.com/https://raw.githubusercontent.com/xcgx/btpanel_tools/main/btpanel_tools.sh && bash btpanel_tools.sh
 ``` 
 ###### 功能说明
 ()清理垃圾[清理系统面板网站产生的缓存日志文件慎用]   
